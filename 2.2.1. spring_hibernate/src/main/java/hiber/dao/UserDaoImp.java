@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -34,14 +35,14 @@ public class UserDaoImp implements UserDao {
    }
    @Override
    @SuppressWarnings("unchecked")
-   public User getUserByCar(String model, int series) {
+   public Optional<User> getUserByCar(String model, int series) {
       String hql = "from User user where user.car.model = :model and user.car.series = :series";
       try {
          TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
          query.setParameter("model", model).setParameter("series", series);
-         return query.setMaxResults(1).getSingleResult();
+         return Optional.ofNullable(query.setMaxResults(1).getSingleResult());
       } catch (NoResultException ex) {
-         return null;
+         return Optional.empty();
       }
    }
 }
