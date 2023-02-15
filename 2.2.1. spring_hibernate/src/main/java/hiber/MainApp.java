@@ -29,8 +29,11 @@ public class MainApp {
               new User("User4", "Lastname4", "user4@mail.ru",
               new Car("Mercedes", 600)));
       userService.add(
-              new User("User5", "Lastname5", "user5@mail.ru",
-              new Car()));
+              new User("Юзер5", "ЛастНэйм5", "user5@mail.ru",
+              new Car("ВАЗ",2109)));
+      userService.add(
+              new User("User6", "Lastname6", "user6@mail.ru",
+                      new Car()));
 
       List<User> users = userService.listUsers();
       for (User user : users) {
